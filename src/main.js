@@ -1,12 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
-import {say_hello} from "./init.js";
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(70, iw/ih);
-const renderer = new THREE.WebGLRenderer({canvas});
-const light = new THREE.PointLight(0xffffe6);
-const clock = new THREE.Clock();
+import {settings} from "./init.js";
 
 const plateau_geo = new THREE.BoxGeometry(5, 0.1, 5);
 const plateau_material = new THREE.MeshPhongMaterial( {color: 0xb8b894} );
@@ -19,6 +13,7 @@ let rengoku_clips;
 let wave_clip;
 let action;
 
+let scene = settings.scene;
 rengoku_loader.load('animations/wave.glb', function (gltf) {
     rengoku_model = gltf.scene;
     rengoku_model.scale.set(0.3, 0.3, 0.3)
@@ -34,20 +29,16 @@ rengoku_loader.load('animations/wave.glb', function (gltf) {
         console.error('An error occured while loading the model', error);
     }
 );
+settings.scene = scene;
 
-camera.position.set(0, 2, 4);
-light.position.set(0.2, 1.5,0.5);
-scene.add(mesh_plateau);
-scene.add(light);
-
-scene.background = new THREE.Color(0xC0D9E2);
 mesh_plateau.position.set(0, 0.5, -0.1);
 mesh_plateau.rotation.x += 0.1;
+settings.scene.add(mesh_plateau);
 
 loop()
 
 function loop() {
     requestAnimationFrame(loop);
-    mixer.update(clock.getDelta());
-    renderer.render(scene, camera);
+    mixer.update((settings.clock).getDelta());
+    settings.renderer.render(settings.scene, settings.camera);
 }
