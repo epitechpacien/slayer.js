@@ -1,4 +1,4 @@
-SLAYER.JS - JavaScript 3D GAME
+SLAYER.JS - DEMON SLAYER JavaScript 3D GAME
 __________________________________
 DESCRIPTION:
 
