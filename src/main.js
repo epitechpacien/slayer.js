@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {say_hello} from "./init.js";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(70, iw/ih);
@@ -17,7 +18,6 @@ let mixer;
 let rengoku_clips;
 let wave_clip;
 let action;
-let rengoku_pos;
 
 rengoku_loader.load('animations/wave.glb', function (gltf) {
     rengoku_model = gltf.scene;
