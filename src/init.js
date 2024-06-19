@@ -7,7 +7,6 @@ class scene_settings {
         this.renderer;
         this.light;
         this.clock;
-        this.mixer;
     }
 }
 /*initialisation of settings class*/
