@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
-
 class scene_settings {
     constructor() {
         this.scene;
@@ -22,5 +21,17 @@ settings.camera.position.set(0, 2, 4);
 settings.light.position.set(0.2, 1.5,0.5);
 settings.scene.background = new THREE.Color(0xC0D9E2);
 settings.scene.add(settings.light);
+
+function init_plateau(settings) {
+    const plateau_geo = new THREE.BoxGeometry(30, 0.1, 30);
+    const plateau_material = new THREE.MeshPhongMaterial( {color: 0xb8b894} );
+    const mesh_plateau = new THREE.Mesh(plateau_geo, plateau_material);
+
+    mesh_plateau.position.set(0, 0.5, -0.1);
+    mesh_plateau.rotation.x += 0.1;
+    settings.scene.add(mesh_plateau);
+}
+
+init_plateau(settings);
 
 export {settings};
