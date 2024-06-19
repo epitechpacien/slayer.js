@@ -7,7 +7,8 @@ Your goal is to find the secret demon and save citizens.
 __________________________________
 HOW TO INSTALL:
 
-git clone the repository. Then install npm and run npx vite.
+1. git clone the repository. Then install npm and run npx vite.
+2. load the link and play.
 __________________________________
 LICENSE :
 
