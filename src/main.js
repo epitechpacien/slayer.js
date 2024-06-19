@@ -34,3 +34,5 @@ function loop() {
     mixer.update((settings.clock).getDelta());
     settings.renderer.render(settings.scene, settings.camera);
 }
+
+/*start game loop*/

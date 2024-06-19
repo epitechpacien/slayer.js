@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 class scene_settings {
     constructor() {
         this.scene;
@@ -9,6 +8,7 @@ class scene_settings {
         this.clock;
     }
 }
+/*initialisation of settings class*/
 
 let settings = new scene_settings();
 settings.scene = new THREE.Scene();
@@ -22,6 +22,8 @@ settings.light.position.set(0.2, 1.5,0.5);
 settings.scene.background = new THREE.Color(0xC0D9E2);
 settings.scene.add(settings.light);
 
+/*fill settings variable with info*/
+
 function init_plateau(settings) {
     const plateau_geo = new THREE.BoxGeometry(30, 0.1, 30);
     const plateau_material = new THREE.MeshPhongMaterial( {color: 0xb8b894} );
@@ -31,6 +33,8 @@ function init_plateau(settings) {
     mesh_plateau.rotation.x += 0.1;
     settings.scene.add(mesh_plateau);
 }
+
+/*set the plateau with black color*/
 
 init_plateau(settings);
 
