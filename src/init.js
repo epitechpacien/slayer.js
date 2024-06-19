@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+
 class scene_settings {
     constructor() {
         this.scene;
@@ -6,6 +7,7 @@ class scene_settings {
         this.renderer;
         this.light;
         this.clock;
+        this.mixer;
     }
 }
 /*initialisation of settings class*/
@@ -21,7 +23,6 @@ settings.camera.position.set(0, 2, 4);
 settings.light.position.set(0.2, 1.5,0.5);
 settings.scene.background = new THREE.Color(0xC0D9E2);
 settings.scene.add(settings.light);
-
 /*fill settings variable with info*/
 
 function init_plateau(settings) {
@@ -33,7 +34,6 @@ function init_plateau(settings) {
     mesh_plateau.rotation.x += 0.1;
     settings.scene.add(mesh_plateau);
 }
-
 /*set the plateau with black color*/
 
 init_plateau(settings);
