@@ -1,13 +1,10 @@
-import {settings} from "./init.js";
-import {init_player} from "./player.js";
-
-init_player(settings);
+import {settings, player} from "./player.js";
 
 loop()
 
 function loop() {
     requestAnimationFrame(loop);
-    //(settings.mixer).update((settings.clock).getDelta());
+    player.mixer.update((settings.clock).getDelta());
     settings.renderer.render(settings.scene, settings.camera);
 }
 
