@@ -16,7 +16,6 @@ import {settings} from "./init.js";
         this.z;
     }
  }
-
 /*create player class with all info*/
 
 let player = new player_info();
@@ -44,7 +43,32 @@ rengoku_loader.load('animations/rengoku.glb', function (gltf) {
         console.error('An error occured while loading the model', error);
     }
 );
-
 /*load player model with postion, scale, rotation and run clip*/
 
-export {settings, player};
+function update_player_pos(player, settings)
+{
+    document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+            case 'ArrowLeft':
+                player.x -= 0.0005;
+                settings.x -= 0.0005;
+                break;
+            case 'ArrowRight':
+                player.x += 0.0005;
+                settings.x += 0.0005
+                break;
+            case 'ArrowUp':
+                player.z -= 0.0005;
+                settings.z -= 0.0005;
+                break;
+            case 'ArrowDown':
+                player.z += 0.0005;
+                settings.z += 0.0005;
+                break;
+        }
+        player.model.position.set(player.x, player.y, player.z);
+        settings.camera.position.set(settings.x, settings.y, settings.z);
+    });
+};
+
+export {settings, player, update_player_pos};
