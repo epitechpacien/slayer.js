@@ -7,6 +7,9 @@ class scene_settings {
         this.renderer;
         this.light;
         this.clock;
+        this.x;
+        this.y;
+        this.z;
     }
 }
 /*initialisation of settings class*/
@@ -17,8 +20,11 @@ settings.camera = new THREE.PerspectiveCamera(70, iw/ih);
 settings.renderer = new THREE.WebGLRenderer({canvas});
 settings.light = new THREE.PointLight(0xffffe6);
 settings.clock = new THREE.Clock();
+settings.x = 0;
+settings.y = 2;
+settings.z = 4;
 
-settings.camera.position.set(0, 2, 4);
+settings.camera.position.set(settings.x, settings.y, settings.z);
 settings.light.position.set(0.2, 1.5,0.5);
 settings.scene.background = new THREE.Color(0xC0D9E2);
 settings.scene.add(settings.light);
