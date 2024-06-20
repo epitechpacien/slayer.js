@@ -6,6 +6,7 @@ import {settings} from "./init.js";
     constructor () {
         this.model;
         this.mixer;
+        this.idle_clip;
         this.run_clip;
         this.jump_clip;
         this.dash_clip;
@@ -27,10 +28,11 @@ rengoku_loader.load('animations/rengoku.glb', function (gltf) {
     settings.scene.add(player.model);
     player.mixer = new THREE.AnimationMixer(player.model);
     rengoku_clips = gltf.animations;
+    player.idle_clip = THREE.AnimationClip.findByName(rengoku_clips, 'idle');
     player.run_clip = THREE.AnimationClip.findByName(rengoku_clips, 'ninja_run');
     player.jump_clip = THREE.AnimationClip.findByName(rengoku_clips, 'jump');
     player.dash_clip = THREE.AnimationClip.findByName(rengoku_clips, 'dash');
-    player.action = player.mixer.clipAction(player.run_clip);
+    player.action = player.mixer.clipAction();
     player.action.play();
     }, undefined, function (error) {
         console.error('An error occured while loading the model', error);
