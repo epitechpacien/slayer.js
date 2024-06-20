@@ -11,19 +11,25 @@ import {settings} from "./init.js";
         this.jump_clip;
         this.dash_clip;
         this.action;
+        this.x;
+        this.y;
+        this.z;
     }
  }
 
 /*create player class with all info*/
 
 let player = new player_info();
+player.x = 0;
+player.y = 0.6;
+player.z = 1;
 const rengoku_loader = new GLTFLoader();
 let rengoku_clips;
 
 rengoku_loader.load('animations/rengoku.glb', function (gltf) {
     player.model = gltf.scene;
     player.model.scale.set(0.3, 0.3, 0.3)
-    player.model.position.set(0, 0.6, 1);
+    player.model.position.set(player.x, player.y, player.z);
     player.model.rotation.y = Math.PI;
     settings.scene.add(player.model);
     player.mixer = new THREE.AnimationMixer(player.model);
