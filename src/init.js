@@ -36,7 +36,7 @@ function init_plateau(settings) {
     const mesh_plateau = new THREE.Mesh(plateau_geo, plateau_material);
 
     mesh_plateau.position.set(0, 0.5, -0.1);
-    mesh_plateau.rotation.x += 0.1;
+    mesh_plateau.rotation.x += 0;
     settings.scene.add(mesh_plateau);
 }
 /*set the plateau with black color*/
