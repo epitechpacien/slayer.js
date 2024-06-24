@@ -48,24 +48,26 @@ rengoku_loader.load('animations/rengoku.glb', function (gltf) {
 function update_player_pos(player, settings)
 {
     document.addEventListener('keydown', (event) => {
-        switch (event.key) {
-            case 'ArrowLeft':
-                player.x -= 0.0005;
-                settings.x -= 0.0005;
-                break;
-            case 'ArrowRight':
-                player.x += 0.0005;
-                settings.x += 0.0005
-                break;
-            case 'ArrowUp':
-                player.z -= 0.0005;
-                settings.z -= 0.0005;
-                break;
-            case 'ArrowDown':
-                player.z += 0.0005;
-                settings.z += 0.0005;
-                break;
+        if (event.key == 'ArrowLeft') {
+            player.x -= 0.0005;
+            settings.x -= 0.0005;
         }
+        if (event.key == 'ArrowRight') {
+            player.x += 0.0005;
+            settings.x += 0.0005
+        }
+        if (event.key == 'ArrowUp') {
+            player.z -= 0.0005;
+            settings.z -= 0.0005;
+        }
+        if (event.key == 'ArrowDown') {
+            player.z += 0.0005;
+            settings.z += 0.0005;
+            //player.model.rotation.y = Math.PI;
+            //player.mixer = new THREE.AnimationMixer(player.model);
+        }
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
         player.model.position.set(player.x, player.y, player.z);
         settings.camera.position.set(settings.x, settings.y, settings.z);
     });
