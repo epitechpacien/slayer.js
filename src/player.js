@@ -1,31 +1,31 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import React from 'react';
+import { useRef, useEffect } from 'react';
 import {settings} from "./init.js";
 
  class player_info {
     constructor () {
-        this.model;
-        this.mixer;
-        this.idle_clip;
-        this.run_clip;
-        this.jump_clip;
-        this.dash_clip;
-        this.action;
-        this.x;
-        this.y;
-        this.z;
-    }
+        this.model = null;
+        this.mixer = null;
+        this.idle_clip = null;
+        this.run_clip = null;
+        this.jump_clip = null;
+        this.dash_clip = null;
+        this.action = null;
+        this.x = 0;
+        this.y = 0.6;
+        this.z = 1;
+        this.keys = {};
+    };
  }
 /*create player class with all info*/
 
 let player = new player_info();
-player.x = 0;
-player.y = 0.6;
-player.z = 1;
 const rengoku_loader = new GLTFLoader();
 let rengoku_clips;
 
-rengoku_loader.load('animations/rengoku.glb', function (gltf) {
+rengoku_loader.load('./models/characters/rengoku.glb', function (gltf) {
     player.model = gltf.scene;
     player.model.scale.set(0.3, 0.3, 0.3)
     player.model.position.set(player.x, player.y, player.z);
@@ -48,29 +48,63 @@ rengoku_loader.load('animations/rengoku.glb', function (gltf) {
 function update_player_pos(player, settings)
 {
     document.addEventListener('keydown', (event) => {
-        if (event.key == 'ArrowLeft') {
+        if (event.key === 'ArrowLeft') {
             player.x -= 0.0005;
             settings.x -= 0.0005;
         }
-        if (event.key == 'ArrowRight') {
+        if (event.key === 'ArrowRight') {
             player.x += 0.0005;
             settings.x += 0.0005
         }
-        if (event.key == 'ArrowUp') {
+        if (event.key === 'ArrowUp') {
             player.z -= 0.0005;
             settings.z -= 0.0005;
         }
-        if (event.key == 'ArrowDown') {
+        if (event.key === 'ArrowDown') {
             player.z += 0.0005;
             settings.z += 0.0005;
-            //player.model.rotation.y = Math.PI;
-            //player.mixer = new THREE.AnimationMixer(player.model);
         }
         player.action = player.mixer.clipAction(player.run_clip);
         player.action.play();
         player.model.position.set(player.x, player.y, player.z);
         settings.camera.position.set(settings.x, settings.y, settings.z);
-    });
+    })
+    /*useEffect(() => {
+        const handleKeyDown = (event) => {
+            player.keys[event.key] = true;
+        };
+        const handleKeyUp = (event) => {
+            player.keys[event.key] = false;
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+        };
+    }, []);
+
+    useEffect(() => {
+        const updatePlayer = () => {
+            if (player.keys['ArrowUp']) {
+                player.z -= 0.0005;
+            }
+            if (player.keys['ArrowDown']) {
+                player.z += 0.0005;
+            }
+            if (player.keys['ArrowLeft']) {
+                player.x -= 0.0005;
+            }
+            if (player.keys['ArrowRight']) {
+                player.x += 0.0005;
+            }
+        }
+    })
+    player.action = player.mixer.clipAction(player.run_clip);
+    player.action.play();
+    player.model.position.set(player.x, player.y, player.z);*/
 };
 
 export {settings, player, update_player_pos};

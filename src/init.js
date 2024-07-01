@@ -2,27 +2,19 @@ import * as THREE from 'three';
 
 class scene_settings {
     constructor() {
-        this.scene;
-        this.camera;
-        this.renderer;
-        this.light;
-        this.clock;
-        this.x;
-        this.y;
-        this.z;
-    }
+        this.scene = new THREE.Scene();
+        this.camera= new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight);
+        this.renderer =  new THREE.WebGLRenderer();
+        this.light = new THREE.PointLight(0xffffe6);
+        this.clock = new THREE.Clock();
+        this.x = 0;
+        this.y = 2;
+        this.z = 4;
+    };
 }
 /*initialisation of settings class*/
 
 let settings = new scene_settings();
-settings.scene = new THREE.Scene();
-settings.camera = new THREE.PerspectiveCamera(70, iw/ih);
-settings.renderer = new THREE.WebGLRenderer({canvas});
-settings.light = new THREE.PointLight(0xffffe6);
-settings.clock = new THREE.Clock();
-settings.x = 0;
-settings.y = 2;
-settings.z = 4;
 
 settings.camera.position.set(settings.x, settings.y, settings.z);
 settings.light.position.set(0.2, 1.5,0.5);
