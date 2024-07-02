@@ -16,7 +16,7 @@ import {settings} from "./init.js";
         this.x = 0;
         this.y = 0.6;
         this.z = 1;
-        this.keys = {};
+        //this.keys = {};//useState({ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false});
     };
  }
 /*create player class with all info*/
@@ -45,66 +45,28 @@ rengoku_loader.load('./models/characters/rengoku.glb', function (gltf) {
 );
 /*load player model with postion, scale, rotation and run clip*/
 
-function update_player_pos(player, settings)
+function update_player_pos(keysPressed, player)
 {
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowLeft') {
-            player.x -= 0.0005;
-            settings.x -= 0.0005;
-        }
-        if (event.key === 'ArrowRight') {
-            player.x += 0.0005;
-            settings.x += 0.0005
-        }
-        if (event.key === 'ArrowUp') {
-            player.z -= 0.0005;
-            settings.z -= 0.0005;
-        }
-        if (event.key === 'ArrowDown') {
-            player.z += 0.0005;
-            settings.z += 0.0005;
-        }
+    if (keysPressed.ArrowUp) {
         player.action = player.mixer.clipAction(player.run_clip);
         player.action.play();
-        player.model.position.set(player.x, player.y, player.z);
-        settings.camera.position.set(settings.x, settings.y, settings.z);
-    })
-    /*useEffect(() => {
-        const handleKeyDown = (event) => {
-            player.keys[event.key] = true;
-        };
-        const handleKeyUp = (event) => {
-            player.keys[event.key] = false;
-        }
-
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('keyup', handleKeyUp);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('keyup', handleKeyUp);
-        };
-    }, []);
-
-    useEffect(() => {
-        const updatePlayer = () => {
-            if (player.keys['ArrowUp']) {
-                player.z -= 0.0005;
-            }
-            if (player.keys['ArrowDown']) {
-                player.z += 0.0005;
-            }
-            if (player.keys['ArrowLeft']) {
-                player.x -= 0.0005;
-            }
-            if (player.keys['ArrowRight']) {
-                player.x += 0.0005;
-            }
-        }
-    })
-    player.action = player.mixer.clipAction(player.run_clip);
-    player.action.play();
-    player.model.position.set(player.x, player.y, player.z);*/
+        player.model.position.z -= 0.005;
+    }
+    if (keysPressed.ArrowDown) {
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
+        player.model.position.z += 0.005;
+    }
+    if (keysPressed.ArrowLeft) {
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
+        player.model.position.x -= 0.005;
+    }
+    if (keysPressed.ArrowRight) {
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
+        player.model.position.x += 0.005;
+    }
 };
 
 export {settings, player, update_player_pos};
