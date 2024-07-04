@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
-import React from 'react';
-import { useRef, useEffect } from 'react';
 import {settings} from "./init.js";
 
  class player_info {
@@ -45,28 +43,13 @@ rengoku_loader.load('./models/characters/rengoku.glb', function (gltf) {
 );
 /*load player model with postion, scale, rotation and run clip*/
 
-function update_player_pos(keysPressed, player)
-{
-    if (keysPressed.ArrowUp) {
-        player.action = player.mixer.clipAction(player.run_clip);
-        player.action.play();
-        player.model.position.z -= 0.005;
-    }
-    if (keysPressed.ArrowDown) {
-        player.action = player.mixer.clipAction(player.run_clip);
-        player.action.play();
-        player.model.position.z += 0.005;
-    }
-    if (keysPressed.ArrowLeft) {
-        player.action = player.mixer.clipAction(player.run_clip);
-        player.action.play();
-        player.model.position.x -= 0.005;
-    }
-    if (keysPressed.ArrowRight) {
-        player.action = player.mixer.clipAction(player.run_clip);
-        player.action.play();
-        player.model.position.x += 0.005;
-    }
-};
+const controls = {
+    up: 'up',
+    down: 'down',
+    left: 'left',
+    right: 'right',
+    dash: 'dash',
+    jump: 'jump'
+}
 
-export {settings, player, update_player_pos};
+export {settings, player, controls};
