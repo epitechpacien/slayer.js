@@ -1,9 +1,10 @@
-// src/ThreeScene.js
 import React from 'react';
-import { useMemo, useRef, useEffect } from 'react';
+import { useMemo, useRef, useEffect, Suspense } from 'react';
 import { insertCoin, onPlayerJoin } from 'playroomkit';
-import { useStore } from "./components/store";
+import { play_audio, useStore } from "./components/store";
 import {settings, player, controls} from "./player.js";
+import { Environment, KeyboardControls, Loader, OrbitControls, Preload, Stats } from '@react-three/drei';
+import * as THREE from "three";
 
 const ThreeScene = () => {
   const mountRef = useRef(null);
@@ -54,7 +55,12 @@ const ThreeScene = () => {
     //free mountref component
   },);
 
-  return <div ref={mountRef}></div>;
+  return (
+    <>
+    <Loader />
+    <div ref={mountRef}></div>;
+    </>
+  )
 };
 
 export default ThreeScene;

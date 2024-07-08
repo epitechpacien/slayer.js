@@ -1,13 +1,5 @@
 import { create } from "zustand";
 
-export const play_audio = (path, callback) => {
-    const audio = new Audio(`./sounds/${path}.mp3`);
-    if (callback) {
-      audio.addEventListener("ended", callback);
-    }
-    audio.play();
-  };
-
   export const useStore = create((set, get) => ({
     game_started: false,
     controls: "",
