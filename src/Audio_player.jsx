@@ -35,19 +35,21 @@ const AudioPlayer = () => {
                 <source src="./sounds/infinite_castle.mp3" type="audio/mpeg" />
                 Your browser does not support the audio element.
             </audio>
-            <div>
-                <button onClick={playAudio}>Play</button>
-                <button onClick={stopAudio}>Stop</button>
-            </div>
-            <div>
-                <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    onChange={setVolume}
-                    defaultValue="1"
-                />
+            <div className="Music">
+                <div>
+                    <button onClick={playAudio}>Play</button>
+                    <button onClick={stopAudio}>Stop</button>
+                </div>
+                <div>
+                    <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        onChange={setVolume}
+                        defaultValue="1"
+                    />
+                </div>
             </div>
         </div>
     );

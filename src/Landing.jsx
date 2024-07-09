@@ -65,11 +65,11 @@ export const Landing = () => {
             <>
                 {setup_status === 0 && (
                     <div className="home" ref={home_ref}>
-                        <h1
-                            size={100}
-                            >SLAYER.JS</h1>
                         <div className="logo">
                             <img ref={logo} src="./wallpaper.png" alt="logo" />
+                        </div>
+                        <div className="title">
+                        <h1>SLAYER.JS</h1>
                         </div>
                         <div className="start" ref={start_button}>
                             <button className="start-button"
