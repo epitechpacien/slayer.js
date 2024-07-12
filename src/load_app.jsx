@@ -1,8 +1,8 @@
 import React from 'react';
-import { useMemo, useRef, useEffect, Suspense } from 'react';
+import { useMemo, useState, useRef, useEffect, Suspense } from 'react';
 import { insertCoin, onPlayerJoin } from 'playroomkit';
 import { useStore } from "./components/store";
-import {settings, player } from "./player.js";
+import {settings, player , update_player_pos} from "./player.js";
 import { Loader } from '@react-three/drei';
 
 const ThreeScene = () => {
@@ -20,6 +20,9 @@ const ThreeScene = () => {
       });
     });
   }
+  //setup login session
+
+  const [keysPressed, setKeysPressed] = useState({ ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false });
 
   useEffect(() => {
     start();
@@ -32,16 +35,33 @@ const ThreeScene = () => {
       if (player.mixer) {
         player.mixer.update(settings.clock.getDelta());
       }
+      update_player_pos(keysPressed, player, settings);
+      //console.log('touche appuer:' + keysPressed['ArrowUp']);
       settings.renderer.render(settings.scene, settings.camera);
     };
     animate_loop();
     //load animation
 
+    const handleKeyDown = (event) => {
+      setKeysPressed((prevState) => ({ ...prevState, [event.key]: true }));
+      console.log(event.key + '= j ai appuyé');
+    };
+
+    const handleKeyUp = (event) => {
+      setKeysPressed((prevState) => ({ ...prevState, [event.key]: false }));
+      console.log(event.key + '= j ai pas appuyé');
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
     return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
       mountRef.current.removeChild(settings.renderer.domElement);
     };
     //free mountref component
-  },);
+  }, [keysPressed]);
 
   return (
     <>

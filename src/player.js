@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {settings} from "./init.js";
+import React from 'react';
+import { useRef, useEffect } from 'react';
 
  class player_info {
     constructor () {
@@ -14,7 +16,7 @@ import {settings} from "./init.js";
         this.x = 0;
         this.y = 0.6;
         this.z = 1;
-        //this.keys = {};//useState({ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false});
+        this.keys = {};
     };
  }
 /*create player class with all info*/
@@ -43,4 +45,32 @@ rengoku_loader.load('./models/characters/rengoku.glb', function (gltf) {
 );
 /*load player model with postion, scale, rotation and run clip*/
 
-export {settings, player};
+function update_player_pos(keysPressed, player, settings)
+{
+    if (keysPressed.ArrowUp) {
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
+        player.model.position.z -= 0.005;
+        settings.camera.position.z -= 0.005;
+    }
+    if (keysPressed.ArrowDown) {
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
+        player.model.position.z += 0.005;
+        settings.camera.position.z += 0.005;
+    }
+    if (keysPressed.ArrowLeft) {
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
+        player.model.position.x -= 0.005;
+        settings.camera.position.x -= 0.005;
+    }
+    if (keysPressed.ArrowRight) {
+        player.action = player.mixer.clipAction(player.run_clip);
+        player.action.play();
+        player.model.position.x += 0.005;
+        settings.camera.position.x += 0.005;
+    }
+};
+
+export {settings, player, update_player_pos};
