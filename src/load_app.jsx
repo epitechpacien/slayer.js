@@ -1,24 +1,12 @@
 import React from 'react';
 import { useMemo, useRef, useEffect, Suspense } from 'react';
 import { insertCoin, onPlayerJoin } from 'playroomkit';
-import { play_audio, useStore } from "./components/store";
-import {settings, player, controls} from "./player.js";
-import { Environment, KeyboardControls, Loader, OrbitControls, Preload, Stats } from '@react-three/drei';
-import * as THREE from "three";
+import { useStore } from "./components/store";
+import {settings, player } from "./player.js";
+import { Loader } from '@react-three/drei';
 
 const ThreeScene = () => {
   const mountRef = useRef(null);
-  const map = useMemo(
-    () => [
-      { name: controls.up, keys: ['KeyZ', 'ArrowUp'] },
-      { name: controls.down, keys: ['KeyS', 'ArrowDown'] },
-      { name: controls.left, keys: ['KeyQ', 'ArrowLeft'] },
-      { name: controls.right, keys: ['KeyD', 'ArrowRight'] },
-      { name: controls.dash, keys: ['Shift'] },
-      { name: controls.jump, keys: ['Space'] }
-    ],
-    []
-  );
 
   const { actions } = useStore();
   const start = async () => {

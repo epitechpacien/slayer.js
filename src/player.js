@@ -43,13 +43,4 @@ rengoku_loader.load('./models/characters/rengoku.glb', function (gltf) {
 );
 /*load player model with postion, scale, rotation and run clip*/
 
-const controls = {
-    up: 'up',
-    down: 'down',
-    left: 'left',
-    right: 'right',
-    dash: 'dash',
-    jump: 'jump'
-}
-
-export {settings, player, controls};
+export {settings, player};
